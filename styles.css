@@ -1,0 +1,226 @@
+/* ==================================== */
+/* 1. Estilos Base y Variables Neumórficas */
+/* ==================================== */
+:root {
+    --bg-color: #e0e5ec;
+    --main-shadow-light: #ffffff;
+    --main-shadow-dark: #A3B1C6;
+    --text-color: #333;
+    --primary-color: #4CAF50; /* Color de acento (ej. para links) */
+    --border-radius: 20px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+}
+
+body {
+    background: var(--bg-color);
+    transform: translate(0,50px);
+    padding: 10px;
+    line-height: 1.6;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    opacity: 0;
+}
+
+/* ==================================== */
+/* 2. Clases de Componentes Neumórficos */
+/* ==================================== */
+
+/* Estilo para todas las tarjetas (extruido) */
+.neumo-card {
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 8px 8px 16px var(--main-shadow-dark), 
+               -8px -8px 16px var(--main-shadow-light);
+}
+
+/* Estilo para los chips de habilidades (pequeño y hundido) */
+.neumo-chip {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px 5px 5px 0;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    background: var(--bg-color);
+    /* Sombra opuesta para el efecto de "hundido" */
+    box-shadow: inset 3px 3px 6px var(--main-shadow-dark), 
+                inset -3px -3px 6px var(--main-shadow-light); 
+}
+
+/* Estilo base para todos los botones (extruido) */
+.neumo-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    background: var(--bg-color);
+    box-shadow: 6px 6px 12px var(--main-shadow-dark), 
+               -6px -6px 12px var(--main-shadow-light);
+    transition: all 0.2s ease;
+}
+
+/* Estado de click/touch (hundido - gestionado por JS y :active) */
+.neumo-btn.pressed, .neumo-btn:active {
+    box-shadow: inset 4px 4px 8px var(--main-shadow-dark), 
+                inset -4px -4px 8px var(--main-shadow-light);
+    transform: scale(0.98);
+}
+
+/* Botones circulares (Redes Sociales) */
+.neumo-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    margin: 0 5px;
+}
+
+/* Botones rectangulares (Proyectos) */
+.neumo-rect {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+/* ==================================== */
+/* 3. Estructura y Contenido Específico */
+/* ==================================== */
+
+/* Header */
+.header-card {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+}
+.foto-perfil {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    /* Efecto Neumórfico alrededor de la foto */
+    box-shadow: 4px 4px 8px var(--main-shadow-dark), 
+               -4px -4px 8px var(--main-shadow-light);
+    padding: 5px;
+}
+.header-card h1 {
+    font-size: 1.8rem;
+    margin: 5px 0;
+}
+.header-card p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Contenido de Secciones */
+h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--main-shadow-dark); /* Separador suave */
+    padding-bottom: 5px;
+}
+
+h3 {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Estilos de Listas */
+.soft-skills ul, .card-experiencia ul, .formacion-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+.soft-skills li, .card-experiencia li, .formacion-details li {
+    margin-bottom: 5px;
+    padding-left: 15px;
+    position: relative;
+}
+.soft-skills li::before, .card-experiencia li::before {
+    content: "•"; /* Viñeta */
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+.fecha {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+/* ==================================== */
+/* 4. Estructura Responsive (Mobile First) */
+/* ==================================== */
+
+/* MOBILE FIRST: Por defecto, todas las secciones son columnas (apiladas) */
+.main-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+/* DESKTOP (A partir de 768px de ancho) */
+@media (min-width: 768px) {
+    body {
+        padding: 50px;
+        max-width: 1200px;
+        margin: 0 auto; /* Centrar el CV en pantallas grandes */
+    }
+
+    /* Estructura de rejilla para simular el diseño de la imagen */
+    .main-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+        grid-template-rows: auto;
+        gap: 20px;
+    }
+
+    /* Asignación de áreas para el diseño de escritorio */
+    .card-perfil {
+        grid-column: span 1; /* Ocupa 1 columna */
+    }
+
+    .card-habilidades {
+        grid-column: span 1;
+    }
+
+    .card-proyectos {
+        grid-column: span 1;
+    }
+
+    .card-experiencia {
+        grid-column: span 2; /* Ocupa 2 columnas */
+    }
+
+    .card-formacion {s
+        grid-column: span 1; /* Ocupa 1 columna */
+    }
+
+    /* Ajuste de márgenes de tarjeta para el grid */
+    .neumo-card {
+        margin-bottom: 0;
+    }
+
+    .hard-skills, .soft-skills {
+        padding-top: 5px;
+    }
+}
